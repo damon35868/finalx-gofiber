@@ -61,3 +61,7 @@ func Response(ctx *fiber.Ctx, data interface{}, codes ...int) error {
 		"data":    data,
 	})
 }
+
+func HasNextPage(skip, take, total int) bool {
+	return skip*take < total
+}
