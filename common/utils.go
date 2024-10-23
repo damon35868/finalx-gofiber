@@ -19,17 +19,17 @@ func MD5(s string) string {
 	return fmt.Sprintf("%x\n", sum)
 }
 
-func GetTokenUserId(c *fiber.Ctx) int {
+func GetTokenUserId(c *fiber.Ctx) int32 {
 	token := c.Locals("user").(*jwt.Token)
 	claims := token.Claims.(jwt.MapClaims)
 	userId := claims["userId"]
 
 	if userIdFloat, ok := userId.(float64); ok {
-		return int(userIdFloat)
+		return int32(userIdFloat)
 	}
 	if userIdStr, ok := userId.(string); ok {
 		if userIdInt, err := strconv.Atoi(userIdStr); err == nil {
-			return userIdInt
+			return int32(userIdInt)
 		}
 	}
 	return 0
